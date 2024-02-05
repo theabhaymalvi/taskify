@@ -23,6 +23,10 @@ app.use(express.json());
 app.use("/api/tasks", tasksRoute);
 app.use("/api/auth", authRoute);
 
+app.use("/", (req,res) => {
+    res.json({message: "Hello World!!"});
+});
+
 db.on("error", (err) => console.log(err));
 db.on("open", () => console.log("Database Connected..."));
 
