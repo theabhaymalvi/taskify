@@ -29,8 +29,4 @@ db.on("open", () => console.log("Database Connected..."));
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server is listening on ${PORT}`));
 
-app.get('/', (req, res) => {
-    res.send('Hey this is my API running 🥳')
-})
-
 module.exports = app

@@ -24,7 +24,7 @@ export const AuthProvider = (props) => {
     const signUp = async(e) => {
         e.preventDefault();
         try {
-          const res = await fetch('https://taskify-x6cc.onrender.com/api/auth/register', {
+          const res = await fetch('https://taskify-bk.vercel.app/api/auth/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export const AuthProvider = (props) => {
         e.preventDefault();
 
         try {
-            const res = await fetch("https://taskify-x6cc.onrender.com/api/auth/login", {
+            const res = await fetch("https://taskify-bk.vercel.app/api/auth/login", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export const AuthProvider = (props) => {
       // Task Crud Operations
       const getTask = async(userId) => {
         try {
-            const res = await fetch(`https://taskify-x6cc.onrender.com/api/tasks/?userId=${userId}`, {
+            const res = await fetch(`https://taskify-bk.vercel.app/api/tasks/?userId=${userId}`, {
             method: 'GET'
           });
 
@@ -116,7 +116,7 @@ export const AuthProvider = (props) => {
       const addTask = async(formData) => {
 
         try {
-            const res = await fetch('https://taskify-x6cc.onrender.com/api/tasks/', {
+            const res = await fetch('https://taskify-bk.vercel.app/api/tasks/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ export const AuthProvider = (props) => {
 
       const deleteTask = async(taskId) => {
           try {
-            const res = await fetch(`https://taskify-x6cc.onrender.com/api/tasks/?taskId=${taskId}`, {
+            const res = await fetch(`https://taskify-bk.vercel.app/api/tasks/?taskId=${taskId}`, {
             method: 'DELETE'
           });
 
@@ -160,7 +160,7 @@ export const AuthProvider = (props) => {
 
       const updateTask = async(taskId, updatedData) => {
         try {
-          const res = await fetch(`https://taskify-x6cc.onrender.com/api/tasks/?taskId=${taskId}`, {
+          const res = await fetch(`https://taskify-bk.vercel.app/api/tasks/?taskId=${taskId}`, {
           method: 'PUT',
           headers: {
               'Content-Type': 'application/json',
