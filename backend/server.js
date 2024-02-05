@@ -11,10 +11,7 @@ mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 const app = express();
 
-const corsOptions = {
-    origin: "*",
-};
-app.use(cors(corsOptions));
+app.options('*', cors());
 app.use(express.json());
 
 app.use("/api/tasks", tasksRoute);
