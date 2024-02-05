@@ -6,7 +6,6 @@ const tasksRoute = require("./routes/tasks")
 const authRoute = require("./routes/auth")
 
 dotenv.config();
-// const DATABASE_URL  = "mongodb://127.0.0.1:27017/taskphile";
 mongoose.connect(process.env.DATABASE_URL);
 
 const db = mongoose.connection;

@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken")
 const {body, validationResult} = require("express-validator")
 const router = express.Router();
 const User = require("../models/User")
-const JWT_SECRET_KEY = "godisawesome";
+const dotenv = require('dotenv').config()
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 // 1. Register User
 router.post("/register", [
