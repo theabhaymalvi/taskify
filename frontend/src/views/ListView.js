@@ -2,19 +2,8 @@ import ListCard from "../components/ListCard";
 import AuthContext from "../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 
-const ListView = () => {
-    const {User, getTask, updateTasks} = useContext(AuthContext);
-    const [tasks, setTasks] = useState(null);
-
-    const getData = async() => {
-        let res = await getTask(User._id);
-        console.log(res.data);
-        setTasks(res.data);
-    }
-
-    useEffect(() => {
-        getData();
-    },[updateTasks]);
+const ListView = ({tasks}) => {
+    const {User} = useContext(AuthContext);
 
     if(User && tasks)
     {

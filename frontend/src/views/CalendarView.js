@@ -11,7 +11,7 @@ import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import React from 'react';
 
 
-const CalendarView = () => {
+const CalendarView = ({tasks}) => {
       
       const ServerDay = (props) => {
         const { tasks = [], day, outsideCurrentMonth, ...other } = props;
@@ -40,17 +40,7 @@ const CalendarView = () => {
       }
 
     const [date, setDate] = useState(dayjs(new Date()));
-    const {User, getTask, updateTasks} = useContext(AuthContext);
-    const [tasks, setTasks] = useState(null);
-
-    const getData = async() => {
-        let res = await getTask(User._id);
-        setTasks(res.data);
-    }
-
-    useEffect(() => {
-        getData();
-    },[updateTasks]);
+    const {User} = useContext(AuthContext);
 
     if(User && tasks)
     {

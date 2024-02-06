@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import {ReactComponent as ListIcon} from "../icons/list.svg"
 import {ReactComponent as CalendarIcon} from "../icons/calendar.svg"
 import {ReactComponent as BoardIcon} from "../icons/board.svg"
@@ -10,10 +10,21 @@ import AddTask from "../components/AddTask";
 import AuthContext from "../context/AuthContext"
 
 const Home = () => {
-    const {User, Jwt} = useContext(AuthContext);
+    const {User, Jwt, getTask, updateTasks} = useContext(AuthContext);
 
     const [view, setView] = useState("list");
     const [show, setShow] = useState(false);
+    const [tasks, setTasks] = useState([]);
+
+    const getData = async() => {
+        let res = await getTask(User._id);
+        setTasks(res.data);
+    }
+
+    useEffect(() => {
+        getData();
+    },[updateTasks]);
+
     const openForm = () => {
         setShow(true);
     }
@@ -54,9 +65,9 @@ const Home = () => {
                 <div className="pl-[30px] w-[80vw] flex flex-col">
                     <AddIcon className="pt-[15px] h-12 w-12 cursor-pointer ml-[74vw]" onClick={() => openForm()}/> 
                     <AddTask show={show} closeForm={closeForm}/>
-                    {view=="list" && <ListView />}
-                    {view=="calendar" && <CalendarView />}
-                    {view=="board" && <BoardView />}
+                    {view=="list" && <ListView tasks={tasks}/>}
+                    {view=="calendar" && <CalendarView tasks={tasks}/>}
+                    {view=="board" && <BoardView tasks={tasks} />}
                 </div>
             </div>
         )
