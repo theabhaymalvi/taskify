@@ -17,7 +17,7 @@ const BoardCard = ({data}) => {
         <div ref={drag} className={`flex bg-[#FFF] w-60 p-1 m-1.5 border-[1px] shadow hover:bg-[#F7F7F7] cursor-pointer
         ${isDragging ? "" : " opacity-50"}`}>
             <input type="checkbox" className="mt-1 mb-6 mr-2 w-5 h-5 accent-black"
-            checked={data.completed} onClick={(e) => updateTask(data._id, e.target.checked)}/>
+            checked={data.completed} onClick={(e) => updateTask(data._id, {"completed": true})}/>
             <div className="w-[98%] my-2.5 ml-2">
             <div className="text-base font-medium"> {data.title} </div>
             <div className="flex">
