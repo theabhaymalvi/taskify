@@ -35,8 +35,9 @@ const EditTask = ({closeForm, data}) => {
         formData.userId = User._id;
         formData.urgent = isUrgent;
         formData.important = isImportant;
-        console.log(formData);
-        updateTask(data._id, formData);
+        // console.log(formData);
+        const res = updateTask(data._id, formData);
+        if(res) alert("Task Updated Successfully");
     };
 
     console.log(data);

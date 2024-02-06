@@ -177,7 +177,7 @@ export const AuthProvider = (props) => {
         if(res.ok)
         {
           setUpdateTasks(!updateTasks);
-          alert("Task updated successfully");
+          // alert("Task updated successfully");
           return data;
         }
       } catch (err) {
