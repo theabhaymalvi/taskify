@@ -1,8 +1,9 @@
 const express = require("express")
 const Task = require("../models/Task")
+const verifyUser = require("../middlewares/verifyUser")
 const router = express.Router();
 
-router.get("/", async(req,res) => {
+router.get("/", verifyUser, async(req,res) => {
     try {
         const tasks = await Task.find({userId: req.query.userId});
         res.json({success: true, data: tasks});
@@ -11,7 +12,7 @@ router.get("/", async(req,res) => {
     }
 });
 
-router.post("/", async(req,res) => {
+router.post("/", verifyUser, async(req,res) => {
     try {
         await Task.create(req.body);
         return res.status(200).json({success: true, msg: "Task created successfully!"});
@@ -20,7 +21,7 @@ router.post("/", async(req,res) => {
     }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/", verifyUser, async (req, res) => {
     const taskId = req.query.taskId;
   
     try {
@@ -40,7 +41,7 @@ router.delete("/", async (req, res) => {
   });
 
   // Edit the task
-router.put("/", async (req, res) => {
+router.put("/", verifyUser, async (req, res) => {
     const taskId = req.query.taskId;
     const updates = req.body;
     // console.log(updates);

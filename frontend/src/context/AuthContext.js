@@ -28,7 +28,6 @@ export const AuthProvider = (props) => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            // Add any additional headers if needed
           },
           body: JSON.stringify({
             "name": e.target.name.value,
@@ -64,7 +63,6 @@ export const AuthProvider = (props) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    // Add any additional headers if needed
                 },
                 body: JSON.stringify({
                     "email": e.target.email.value,
@@ -73,6 +71,7 @@ export const AuthProvider = (props) => {
             });
 
             let data = await res.json();
+            console.log(data);
 
             if(res.ok)
             {
@@ -81,9 +80,13 @@ export const AuthProvider = (props) => {
                 setUser(jwtDecode(data.authToken));
                 navigate("/home");
             }
+            else
+            {
+              alert(data.error)
+            }
 
         } catch (err) {
-            console.log("Error:", err.message);
+            alert(err);
         }
       };
 
@@ -98,7 +101,11 @@ export const AuthProvider = (props) => {
       const getTask = async(userId) => {
         try {
             const res = await fetch(`https://taskify-bk.vercel.app/api/tasks/?userId=${userId}`, {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': authToken
+            },
           });
 
           let data = await res.json();
@@ -120,6 +127,7 @@ export const AuthProvider = (props) => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': authToken
             },
             body: JSON.stringify(formData),
           });
@@ -141,7 +149,11 @@ export const AuthProvider = (props) => {
       const deleteTask = async(taskId) => {
           try {
             const res = await fetch(`https://taskify-bk.vercel.app/api/tasks/?taskId=${taskId}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': authToken
+            },
           });
 
           let data = await res.json();
@@ -163,8 +175,8 @@ export const AuthProvider = (props) => {
           const res = await fetch(`https://taskify-bk.vercel.app/api/tasks/?taskId=${taskId}`, {
           method: 'PUT',
           headers: {
-              'Content-Type': 'application/json',
-              // Add any additional headers if needed
+            'Content-Type': 'application/json',
+            'Authorization': authToken
           },
           body: JSON.stringify({
             ...updatedData,

@@ -14,7 +14,7 @@ router.post("/register", [
     body('name', "Name should be of minimum length 3").isLength({min: 3}),
 ], async (req,res) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()) res.status(400).json({errors: errors});
+    if(!errors.isEmpty()) res.status(400).json({"error": errors.errors[0].msg});
 
     // checking existing user
     const user = await User.findOne({email: req.body.email});
@@ -42,7 +42,7 @@ router.post("/login", [
     body('password', "Password should be of minimum length 5").isLength({min: 5}),
 ], async (req,res) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()) return res.status(400).json({errors: errors});
+    if(!errors.isEmpty()) return res.status(400).json({"error": errors.errors[0].msg});
 
     try {
         let result = await User.findOne({email: req.body.email});
